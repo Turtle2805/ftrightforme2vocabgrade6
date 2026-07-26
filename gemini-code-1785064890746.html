@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ĐỀ 02 - THI HỌC KÌ I TIẾNG ANH 6 - Ms Lê Hằng English</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Quicksand:wght@500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  
+  <style>
+    /* ==================== BASE & ANIMATED BACKGROUND ==================== */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Nunito', 'Quicksand', sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(-45deg, #8854c0, #fdcb6e, #00c9a7, #e84393);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+      position: relative;
+      overflow-x: hidden;
+      padding: 20px 10px;
+      color: #2d3436;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .bg-patterns {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath fill='%23ffffff' fill-opacity='0.18' d='M20 10 L25 22 L38 22 L27 30 L31 42 L20 34 L9 42 L13 30 L2 22 L15 22 Z M80 70 C85 65 95 65 100 70 C105 75 105 85 100 90 C95 95 85 95 80 90 C75 85 75 75 80 70 Z M90 20 Q100 10 110 20 T110 40 T90 20 Z M20 80 Q30 70 40 80 T40 100 T20 80 Z'/%3E%3C/svg%3E");
+      animation: floatPatterns 20s linear infinite;
+    }
+
+    @keyframes floatPatterns {
+      0% { background-position: 0 0; }
+      100% { background-position: 100px 200px; }
+    }
+
+    .container {
+      max-width: 840px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ==================== HEADER & ANNOUNCEMENT ==================== */
+    header {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.93);
+      backdrop-filter: blur(10px);
+      padding: 16px 20px;
+      border-radius: 20px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+      margin-bottom: 20px;
+      border: 3px solid #fff;
+    }
+
+    .teacher-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #8854c0;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .important-notice {
+      background: #fff3cd;
+      border: 2px dashed #ffc107;
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 12px;
+      color: #856404;
+      font-size: 0.95rem;
+      line-height: 1.5;
+      text-align: left;
+    }
+
+    .important-notice strong {
+      color: #d63031;
+      display: block;
+      text-align: center;
+      font-size: 1.05rem;
+      margin-bottom: 4px;
+    }
+
+    /* ==================== SECTION TITLE ==================== */
+    .section-header {
+      background: #8854c0;
+      color: #fff;
+      padding: 12px 20px;
+      border-radius: 16px;
+      margin: 25px 0 15px 0;
+      font-size: 1.15rem;
+      font-weight: 800;
+      box-shadow: 0 4px 15px rgba(136, 84, 192, 0.4);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .passage-box {
+      background: #f8fafc;
+      border: 2px solid #8854c0;
+      border-radius: 18px;
+      padding: 18px;
+      margin-bottom: 20px;
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #2d3436;
+    }
+
+    /* ==================== CARDS & QUESTIONS ==================== */
+    .question-card {
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 24px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+      border: 4px solid #fff;
+      transition: transform 0.2s ease;
+    }
+
+    .q-number {
+      display: inline-block;
+      background: #8854c0;
+      color: #fff;
+      font-weight: 800;
+      padding: 4px 14px;
+      border-radius: 12px;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+    }
+
+    .q-text {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #2d3436;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .q-text u {
+      color: #d63031;
+      font-weight: 900;
+      text-decoration-thickness: 3px;
+    }
+
+    /* ==================== OPTIONS & BUTTONS ==================== */
+    .options-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 600px) {
+      .options-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .btn-option {
+      background: #f1f2f6;
+      border: none;
+      border-bottom: 5px solid #cbd5e1;
+      border-radius: 18px;
+      padding: 12px 16px;
+      font-size: 1rem;
+      font-weight: 700;
+      color: #2d3436;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.15s ease;
+    }
+
+    .btn-option:hover:not(:disabled) {
+      transform: translateY(-2px);
+      background: #e2e8f0;
+    }
+
+    .btn-option:active:not(:disabled) {
+      transform: translateY(2px);
+      border-bottom-width: 2px;
+    }
+
+    .btn-option.correct {
+      background: #00d26a !important;
+      color: #fff !important;
+      border-bottom: 5px solid #00a352 !important;
+    }
+
+    .btn-option.wrong {
+      background: #ff4757 !important;
+      color: #fff !important;
+      border-bottom: 5px solid #d63031 !important;
+    }
+
+    .btn-option:disabled {
+      cursor: default;
+      opacity: 0.9;
+    }
+
+    .shake {
+      animation: shakeAnim 0.4s ease-in-out;
+    }
+
+    @keyframes shakeAnim {
+      0%, 100% { transform: translateX(0); }
+      20%, 60% { transform: translateX(-8px); }
+      40%, 80% { transform: translateX(8px); }
+    }
+
+    /* ==================== EXPLANATION BOX ==================== */
+    .explanation-box {
+      display: none;
+      margin-top: 18px;
+      background: #eef2ff;
+      border: 2px solid #818cf8;
+      border-radius: 16px;
+      padding: 16px 20px;
+      font-size: 0.95rem;
+      line-height: 1.65;
+      color: #1e1b4b;
+      animation: fadeIn 0.3s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .explanation-title {
+      font-weight: 800;
+      color: #4338ca;
+      margin-bottom: 8px;
+      font-size: 1rem;
+    }
+
+    .exp-part {
+      margin-bottom: 6px;
+    }
+
+    /* ==================== SUBMIT & RESULT MODAL ==================== */
+    .submit-container {
+      text-align: center;
+      margin: 30px 0 50px 0;
+    }
+
+    .btn-submit {
+      background: #00c9a7;
+      color: #fff;
+      font-size: 1.3rem;
+      font-weight: 900;
+      padding: 16px 48px;
+      border: none;
+      border-bottom: 6px solid #00967d;
+      border-radius: 50px;
+      cursor: pointer;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+      transition: all 0.2s ease;
+    }
+
+    .btn-submit:hover {
+      transform: scale(1.05);
+      background: #00dbb7;
+    }
+
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(5px);
+      z-index: 100;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+    }
+
+    .modal-card {
+      background: #fff;
+      border-radius: 28px;
+      padding: 30px;
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+      animation: popUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    @keyframes popUp {
+      from { transform: scale(0.7); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .score-badge {
+      font-size: 3rem;
+      font-weight: 900;
+      color: #8854c0;
+      margin: 10px 0;
+    }
+
+    .teacher-feedback {
+      background: #f8fafc;
+      border-radius: 16px;
+      padding: 16px;
+      margin: 15px 0;
+      font-size: 1rem;
+      color: #334155;
+      line-height: 1.5;
+      border-left: 5px solid #8854c0;
+    }
+
+    .btn-close {
+      background: #8854c0;
+      color: #fff;
+      border: none;
+      padding: 12px 30px;
+      border-radius: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 1rem;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-patterns"></div>
+
+  <div class="container">
+    <!-- HEADER -->
+    <header>
+      <div class="teacher-title">ĐỀ THI HỌC KÌ I – TIẾNG ANH 6 (ĐỀ 02) | Ms Lê Hằng English</div>
+      <div class="important-notice">
+        <strong>⚠️ LỜI NHẮC CỰC KỲ QUAN TRỌNG ⚠️</strong>
+        Chỉ có đọc kỹ giải thích ngay sau mỗi câu, sau đó ghi lại từ vựng/cấu trúc mới vào vở để học thì mới thực sự giỏi lên.<br>
+        Làm cho xong mà không đọc giải thích hay đọc qua loa không ghi chép thì chỉ tốn thời gian vô ích!<br>
+        <em>* Kéo tới đâu, làm tới đó! *</em>
+      </div>
+    </header>
+
+    <!-- CONTAINER HIỂN THỊ BÀI THI -->
+    <div id="quiz-container"></div>
+
+    <!-- NÚT NỘP BÀI -->
+    <div class="submit-container">
+      <button class="btn-submit" onclick="submitQuiz()">NỘP BÀI THI 🚀</button>
+    </div>
+  </div>
+
+  <!-- MODAL KẾT QUẢ -->
+  <div class="modal-overlay" id="resultModal">
+    <div class="modal-card">
+      <h2>🎉 KẾT QUẢ BÀI THI 🎉</h2>
+      <div class="score-badge" id="scoreDisplay">0 / 0</div>
+      <div class="teacher-feedback" id="feedbackText"></div>
+      <button class="btn-close" onclick="closeModal()">Đóng & Xem lại bài</button>
+    </div>
+  </div>
+
+  <script>
+    /* ==================== WEB AUDIO API ==================== */
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+
+    function playSound(type) {
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      if (type === 'correct') {
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(523.25, audioCtx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(1046.50, audioCtx.currentTime + 0.3);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.3);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.3);
+      } else {
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(180, audioCtx.currentTime);
+        osc.frequency.setValueAtTime(130, audioCtx.currentTime + 0.15);
+        gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.35);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.35);
+      }
+    }
+
+    /* ==================== DỮ LIỆU BÀI TẬP ĐỀ 02 FULL ==================== */
+    const rawData = [
+      // PRONUNCIATION
+      {
+        section: "PART 1. PRONUNCIATION",
+        id: "q1",
+        question: "Question 1. Choose the word whose underlined part differs from the other three in pronunciation:",
+        options: [
+          { label: "A", text: "A. television<u>s</u>" },
+          { label: "B", text: "B. town<u>s</u>" },
+          { label: "C", text: "C. flat<u>s</u>" },
+          { label: "D", text: "D. cupboard<u>s</u>" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Quy tắc phát âm đuôi -s/es:</b></div>
+          <div class="exp-part">• A. television<u>s</u> /ˌtel.ɪ.vɪʒ.ənz/ - đuôi -s phát âm là /z/.</div>
+          <div class="exp-part">• B. town<u>s</u> /taʊnz/ - đuôi -s phát âm là /z/.</div>
+          <div class="exp-part">• C. flat<u>s</u> /flæts/ - đuôi -s đứng sau âm vô thanh /t/ nên phát âm là /s/.</div>
+          <div class="exp-part">• D. cupboard<u>s</u> /ˈkʌb.ədz/ - đuôi -s phát âm là /z/.</div>
+          <div class="exp-part"><b>2. Tại sao chọn C?</b> C có phần gạch chân phát âm là /s/, các từ còn lại phát âm là /z/.</div>
+        `
+      },
+      {
+        section: "PART 1. PRONUNCIATION",
+        id: "q2",
+        question: "Question 2. Choose the word whose underlined part differs from the other three in pronunciation:",
+        options: [
+          { label: "A", text: "A. l<u>ea</u>ve" },
+          { label: "B", text: "B. br<u>ea</u>k" },
+          { label: "C", text: "C. rep<u>ea</u>t" },
+          { label: "D", text: "D. p<u>ea</u>ceful" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Phân tích phát âm nguyên âm 'ea':</b></div>
+          <div class="exp-part">• A. l<u>ea</u>ve /liːv/ - phát âm là /iː/.</div>
+          <div class="exp-part">• B. br<u>ea</u>k /breɪk/ - phát âm là /eɪ/.</div>
+          <div class="exp-part">• C. rep<u>ea</u>t /rɪˈpiːt/ - phát âm là /iː/.</div>
+          <div class="exp-part">• D. p<u>ea</u>ceful /ˈpiːs.fəl/ - phát âm là /iː/.</div>
+          <div class="exp-part"><b>2. Tại sao chọn B?</b> Break phát âm là /eɪ/, 3 từ còn lại phát âm là /iː/.</div>
+        `
+      },
+
+      // ODD ONE OUT
+      {
+        section: "PART 2. ODD ONE OUT",
+        id: "q3",
+        question: "Question 3. Choose the odd one out:",
+        options: [
+          { label: "A", text: "A. better" },
+          { label: "B", text: "B. smaller" },
+          { label: "C", text: "C. worker" },
+          { label: "D", text: "D. bigger" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Phân tích từ loại:</b></div>
+          <div class="exp-part">• A. better (adj): tốt hơn - hình thức so sánh hơn của 'good'.</div>
+          <div class="exp-part">• B. smaller (adj): nhỏ hơn - hình thức so sánh hơn của 'small'.</div>
+          <div class="exp-part">• C. worker (n): công nhân - danh từ chỉ người.</div>
+          <div class="exp-part">• D. bigger (adj): to hơn - hình thức so sánh hơn của 'big'.</div>
+          <div class="exp-part"><b>2. Tại sao chọn C?</b> Worker là danh từ, 3 từ còn lại đều là tính từ ở dạng so sánh hơn.</div>
+        `
+      },
+      {
+        section: "PART 2. ODD ONE OUT",
+        id: "q4",
+        question: "Question 4. Choose the odd one out:",
+        options: [
+          { label: "A", text: "A. brother" },
+          { label: "B", text: "B. mother" },
+          { label: "C", text: "C. father" },
+          { label: "D", text: "D. teacher" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Phân tích ngữ nghĩa từ vựng:</b></div>
+          <div class="exp-part">• A. brother (n): anh/em trai (thành viên gia đình).</div>
+          <div class="exp-part">• B. mother (n): mẹ (thành viên gia đình).</div>
+          <div class="exp-part">• C. father (n): bố (thành viên gia đình).</div>
+          <div class="exp-part">• D. teacher (n): giáo viên (danh từ chỉ nghề nghiệp).</div>
+          <div class="exp-part"><b>2. Tại sao chọn D?</b> Teacher là từ chỉ nghề nghiệp, 3 từ còn lại chỉ quan hệ người thân trong gia đình.</div>
+        `
+      },
+
+      // MULTIPLE CHOICE
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q5",
+        question: "Question 5. The food here is more ............ and cheaper than the food in my hometown.",
+        options: [
+          { label: "A", text: "A. convenient" },
+          { label: "B", text: "B. delicious" },
+          { label: "C", text: "C. modern" },
+          { label: "D", text: "D. boring" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Đồ ăn ở đây ngon hơn và rẻ hơn đồ ăn ở quê tôi."</div>
+          <div class="exp-part"><b>2. Phân tích tính từ đi với đồ ăn (food):</b> Món ăn thì cần miêu tả tính chất ngon (delicious).</div>
+          <div class="exp-part"><b>3. Tại sao chọn B?</b> "more delicious" có nghĩa là ngon hơn.</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q6",
+        question: "Question 6. There aren't ............ natural wonders in that country.",
+        options: [
+          { label: "A", text: "A. any" },
+          { label: "B", text: "B. some" },
+          { label: "C", text: "C. a few" },
+          { label: "D", text: "D. much" }
+        ],
+        correct: "A",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Không có danh lam thắng cảnh thiên nhiên nào ở đất nước đó cả."</div>
+          <div class="exp-part"><b>2. Quy tắc dùng Lượng từ:</b> Dùng <b>any</b> trong câu phủ định (có "aren't") với danh từ số nhiều đếm được.</div>
+          <div class="exp-part"><b>3. Tại sao chọn A?</b> "some" dùng trong câu khẳng định, "much" đi với danh từ không đếm được.</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q7",
+        question: "Question 7. Would you like ............ to music?",
+        options: [
+          { label: "A", text: "A. listening" },
+          { label: "B", text: "B. to listen" },
+          { label: "C", text: "C. listen" },
+          { label: "D", text: "D. listens" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Cậu có muốn nghe nhạc không?"</div>
+          <div class="exp-part"><b>2. Cấu trúc Mời lịch sự:</b> <b>Would you like + to V (nguyên thể)?</b></div>
+          <div class="exp-part"><b>3. Tại sao chọn B?</b> Sau "Would you like" bắt buộc là "to listen".</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q8",
+        question: "Question 8. My brother has ............ short ............ hair.",
+        options: [
+          { label: "A", text: "A. big - black" },
+          { label: "B", text: "B. Ø - long" },
+          { label: "C", text: "C. Ø - curly" },
+          { label: "D", text: "D. a - black" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Anh trai tớ có mái tóc ngắn và xoăn."</div>
+          <div class="exp-part"><b>2. Phân tích danh từ không đếm được:</b> "hair" (tóc) là danh từ không đếm được nên <b>không dùng mạo từ a/an</b> đứng trước.</div>
+          <div class="exp-part"><b>3. Tại sao chọn C?</b> "Ø - curly" phù hợp ngữ pháp và nghĩa (tóc ngắn xoăn).</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q9",
+        question: "Question 9. “Excuse me. Could you tell me the way to the cinema?” - “............”",
+        options: [
+          { label: "A", text: "A. Don’t do that" },
+          { label: "B", text: "B. I’m sorry I don’t like films." },
+          { label: "C", text: "C. I have a class" },
+          { label: "D", text: "D. Sure. Go straight ahead. Then turn right." }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "- Xin lỗi, bạn có thể chỉ đường cho tôi đến rạp chiếu phim được không? - Chắc chắn rồi. Đi thẳng, sau đó rẽ phải."</div>
+          <div class="exp-part"><b>2. Phản hồi lời nhờ chỉ đường:</b> Đáp án D đưa ra lời hướng dẫn đường đi chuẩn xác và lịch sự.</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q10",
+        question: "Question 10. There are two lights ............ the ceiling.",
+        options: [
+          { label: "A", text: "A. in" },
+          { label: "B", text: "B. on" },
+          { label: "C", text: "C. at" },
+          { label: "D", text: "D. between" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Có hai chiếc đèn ở trên trần nhà."</div>
+          <div class="exp-part"><b>2. Giới từ vị trí:</b> Bề mặt trần nhà dùng giới từ <b>on</b> -> <b>on the ceiling</b>.</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q11",
+        question: "Question 11. My salary is ............ his salary.",
+        options: [
+          { label: "A", text: "A. high" },
+          { label: "B", text: "B. more high" },
+          { label: "C", text: "C. higher than" },
+          { label: "D", text: "D. more higher than" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Lương của tớ cao hơn lương của anh ấy."</div>
+          <div class="exp-part"><b>2. So sánh hơn tính từ ngắn:</b> "high" là tính từ ngắn -> Công thức: <b>adj-er + than</b> -> <b>higher than</b>.</div>
+        `
+      },
+      {
+        section: "PART 3. MULTIPLE CHOICE",
+        id: "q12",
+        question: "Question 12. Nam ............ football now. He’s tired.",
+        options: [
+          { label: "A", text: "A. doesn’t play" },
+          { label: "B", text: "B. plays" },
+          { label: "C", text: "C. is playing" },
+          { label: "D", text: "D. isn’t playing" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Dịch câu hỏi:</b> "Bây giờ Nam không đang chơi đá bóng. Cậu ấy mệt rồi."</div>
+          <div class="exp-part"><b>2. Chia thì Hiện tại tiếp diễn:</b> Dấu hiệu "now". Vế sau có "He's tired" (mệt) -> Nam <b>không đang chơi (isn't playing)</b>.</div>
+        `
+      },
+
+      // ANNOUNCEMENT 1 (ESC)
+      {
+        section: "PART 4. ANNOUNCEMENT (ENGLISH SPEAKING CLUB)",
+        passage: "<b>ENGLISH SPEAKING CLUB</b><br>If you want to (13) __________ in an exciting and friendly atmosphere to improve your English, come to our English Speaking Club – ESC! At ESC, you can enjoy various (14) __________ and have the chance to speak with native English speakers.<br>By joining ESC, you and your friends will have (15) ____________ enjoyable learning experience.<br>Contact: Mr. John Smith (0912 345 678)<br>Time: (16) _____________ Tuesday from 10:00 AM to 12:00 PM<br>Location: Room 101 – Central Building",
+        id: "q13",
+        question: "Question 13. Choose the best option for blank (13):",
+        options: [
+          { label: "A", text: "A. join" },
+          { label: "B", text: "B. ignore" },
+          { label: "C", text: "C. play" },
+          { label: "D", text: "D. study" }
+        ],
+        correct: "A",
+        explanation: `
+          <div class="exp-part"><b>1. Cụm động từ:</b> <b>join in</b> = tham gia vào.</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Nếu bạn muốn tham gia vào một bầu không khí sôi động và thân thiện..."</div>
+        `
+      },
+      {
+        section: "PART 4. ANNOUNCEMENT (ENGLISH SPEAKING CLUB)",
+        id: "q14",
+        question: "Question 14. Choose the best option for blank (14):",
+        options: [
+          { label: "A", text: "A. lessons" },
+          { label: "B", text: "B. activities" },
+          { label: "C", text: "C. classes" },
+          { label: "D", text: "D. events" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Từ vựng ghép ngữ cảnh:</b> <b>various activities</b> = nhiều hoạt động khác nhau.</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Tại ESC, bạn có thể trải nghiệm nhiều hoạt động khác nhau và có cơ hội nói chuyện với người bản xứ."</div>
+        `
+      },
+      {
+        section: "PART 4. ANNOUNCEMENT (ENGLISH SPEAKING CLUB)",
+        id: "q15",
+        question: "Question 15. Choose the best option for blank (15):",
+        options: [
+          { label: "A", text: "A. a" },
+          { label: "B", text: "B. some" },
+          { label: "C", text: "C. many" },
+          { label: "D", text: "D. an" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Quy tắc mạo từ:</b> Trước tính từ bắt đầu bằng nguyên âm "enjoyable" /ɪnˈdʒɔɪ.ə.bəl/ đi cùng danh từ đếm được số ít "experience", ta dùng mạo từ <b>an</b>.</div>
+          <div class="exp-part"><b>2. Cụm từ:</b> <b>an enjoyable learning experience</b>.</div>
+        `
+      },
+      {
+        section: "PART 4. ANNOUNCEMENT (ENGLISH SPEAKING CLUB)",
+        id: "q16",
+        question: "Question 16. Choose the best option for blank (16):",
+        options: [
+          { label: "A", text: "A. each" },
+          { label: "B", text: "B. on" },
+          { label: "C", text: "C. every" },
+          { label: "D", text: "D. from" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Từ chỉ tần suất thời gian:</b> <b>every + Thứ trong tuần</b> = vào mỗi Thứ...</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Thời gian: Vào mỗi Thứ Ba từ 10:00 sáng đến 12:00 trưa."</div>
+        `
+      },
+
+      // CLOSEST & OPPOSITE
+      {
+        section: "PART 5. CLOSEST IN MEANING",
+        id: "q17",
+        question: "Question 17. Choose the word CLOSEST in meaning to the underlined word:<br><i>This book is <u>interesting</u>. I like it.</i>",
+        options: [
+          { label: "A", text: "A. normal" },
+          { label: "B", text: "B. fascinating" },
+          { label: "C", text: "C. boring" },
+          { label: "D", text: "D. familiar" }
+        ],
+        correct: "B",
+        explanation: `
+          <div class="exp-part"><b>1. Tìm từ ĐỒNG NGHĨA:</b> <b>interesting</b> = thú vị, hay.</div>
+          <div class="exp-part"><b>2. Phân tích đáp án:</b> <b>fascinating</b> (adj) = rất thú vị, hấp dẫn (đồng nghĩa với interesting).</div>
+          <div class="exp-part"><b>3. Dịch câu:</b> "Cuốn sách này rất hay/thú vị. Tớ thích nó."</div>
+        `
+      },
+      {
+        section: "PART 5. CLOSEST IN MEANING",
+        id: "q18",
+        question: "Question 18. Choose the word CLOSEST in meaning to the underlined word:<br><i>The room is very <u>untidy</u>. There are toys, rubbish on the floor.</i>",
+        options: [
+          { label: "A", text: "A. lovely" },
+          { label: "B", text: "B. clean" },
+          { label: "C", text: "C. cozy" },
+          { label: "D", text: "D. messy" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Tìm từ ĐỒNG NGHĨA:</b> <b>untidy</b> = bừa bộn, không gọn gàng.</div>
+          <div class="exp-part"><b>2. Phân tích đáp án:</b> <b>messy</b> (adj) = bừa bãi, lộn xộn (đồng nghĩa với untidy).</div>
+          <div class="exp-part"><b>3. Dịch câu:</b> "Căn phòng rất bừa bộn. Có đồ chơi và rác rưởi vương vãi trên sàn nhà."</div>
+        `
+      },
+      {
+        section: "PART 6. OPPOSITE IN MEANING",
+        id: "q20",
+        question: "Question 20. Choose the word OPPOSITE in meaning to the underlined word:<br><i>His idea is quite <u>different</u> from mine.</i>",
+        options: [
+          { label: "A", text: "A. unlike" },
+          { label: "B", text: "B. not the same" },
+          { label: "C", text: "C. from" },
+          { label: "D", text: "D. similar" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Tìm từ TRÁI NGHĨA:</b> <b>different</b> = khác biệt.</div>
+          <div class="exp-part"><b>2. Phân tích đáp án:</b> Trái nghĩa với "different" (khác biệt) là <b>similar</b> (tương tự, giống nhau).</div>
+          <div class="exp-part"><b>3. Dịch câu:</b> "Ý tưởng của anh ấy khá khác so với ý tưởng của tớ."</div>
+        `
+      },
+      {
+        section: "PART 6. OPPOSITE IN MEANING",
+        id: "q21",
+        question: "Question 21. Choose the word OPPOSITE in meaning to the underlined word:<br><i>Ha Noi is <u>noisier</u> than Hoi An.</i>",
+        options: [
+          { label: "A", text: "A. more peaceful" },
+          { label: "B", text: "B. peacefuler" },
+          { label: "C", text: "C. more busy" },
+          { label: "D", text: "D. busier" }
+        ],
+        correct: "A",
+        explanation: `
+          <div class="exp-part"><b>1. Tìm từ TRÁI NGHĨA:</b> <b>noisier</b> = ồn ào hơn.</div>
+          <div class="exp-part"><b>2. Phân tích đáp án:</b> Trái nghĩa với ồn ào hơn là yên bình hơn (<b>more peaceful</b>).</div>
+          <div class="exp-part"><b>3. Lưu ý ngữ pháp:</b> Peaceful là tính từ dài nên dạng so sánh hơn phải dùng "more peaceful".</div>
+        `
+      },
+
+      // READING CLOZE TEST (TRA CO BEACH)
+      {
+        section: "PART 7. READING CLOZE TEST (TRA CO BEACH)",
+        passage: "Tra Co Beach in Quang Ninh province is 9 kilometres from Mong Cai. It has the (22)......... and the most romantic beach in Viet Nam. Tourists can enjoy the (23)....... of white sand beaches and green sea water all year (24).......... Visitors can (25).......... enjoy the sunset or sunrise in Con Mang islet. You can visit Tra Co Communal House, Linh Khanh Pagoda, and Tra Co church. If tourists want some fresh (26).........., they can find it from fishing boats. They can take part in “Tra Co Festival” from May 30 to June 6.",
+        id: "q22",
+        question: "Question 22. Choose the best option for blank (22):",
+        options: [
+          { label: "A", text: "A. long" },
+          { label: "B", text: "B. longer" },
+          { label: "C", text: "C. longest" },
+          { label: "D", text: "D. lengther" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. So sánh nhất tính từ ngắn:</b> Đứng sau mạo từ "the" và nối với "the most romantic" bằng từ 'and' -> Dùng so sánh nhất <b>longest</b>.</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Nơi đây có bãi biển dài nhất và lãng mạn nhất Việt Nam."</div>
+        `
+      },
+      {
+        section: "PART 7. READING CLOZE TEST (TRA CO BEACH)",
+        id: "q23",
+        question: "Question 23. Choose the best option for blank (23):",
+        options: [
+          { label: "A", text: "A. beauty" },
+          { label: "B", text: "B. beautiful" },
+          { label: "C", text: "C. beautify" },
+          { label: "D", text: "D. pretty" }
+        ],
+        correct: "A",
+        explanation: `
+          <div class="exp-part"><b>1. Danh từ đứng sau mạo từ:</b> Sau "the" ta cần một danh từ. <b>beauty</b> (n) = vẻ đẹp.</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Du khách có thể thưởng thức vẻ đẹp của những bãi cát trắng..."</div>
+        `
+      },
+      {
+        section: "PART 7. READING CLOZE TEST (TRA CO BEACH)",
+        id: "q24",
+        question: "Question 24. Choose the best option for blank (24):",
+        options: [
+          { label: "A", text: "A. over" },
+          { label: "B", text: "B. long" },
+          { label: "C", text: "C. round" },
+          { label: "D", text: "D. longer" }
+        ],
+        correct: "C",
+        explanation: `
+          <div class="exp-part"><b>1. Cụm từ cố định:</b> <b>all year round</b> = quanh năm.</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "...và nước biển xanh trong suốt cả năm."</div>
+        `
+      },
+      {
+        section: "PART 7. READING CLOZE TEST (TRA CO BEACH)",
+        id: "q25",
+        question: "Question 25. Choose the best option for blank (25):",
+        options: [
+          { label: "A", text: "A. be" },
+          { label: "B", text: "B. be able" },
+          { label: "C", text: "C. then" },
+          { label: "D", text: "D. also" }
+        ],
+        correct: "D",
+        explanation: `
+          <div class="exp-part"><b>1. Trạng từ đứng giữa Động từ khuyết thiếu & Động từ chính:</b> Đứng giữa "can" và "enjoy" dùng <b>also</b> (cũng có thể).</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Du khách cũng có thể ngắm hoàng hôn hoặc bình minh ở cồn Cồn Mang."</div>
+        `
+      },
+      {
+        section: "PART 7. READING CLOZE TEST (TRA CO BEACH)",
+        id: "q26",
+        question: "Question 26. Choose the best option for blank (26):",
+        options: [
+          { label: "A", text: "A. seafood" },
+          { label: "B", text: "B. menu" },
+          { label: "C", text: "C. air" },
+          { label: "D", text: "D. water" }
+        ],
+        correct: "A",
+        explanation: `
+          <div class="exp-part"><b>1. Cụm từ & Ngữ cảnh:</b> Vế sau có "fishing boats" (thuyền đánh cá) -> Đồ mua được ở thuyền đánh cá là <b>fresh seafood</b> (hải sản tươi sống).</div>
+          <div class="exp-part"><b>2. Dịch câu:</b> "Nếu du khách muốn thưởng thức hải sản tươi sống, họ có thể mua từ các thuyền đánh cá."</div>
+        `
+      }
+    ];
+
+    let processedQuestions = [];
+
+    // Thuật toán Shuffle
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    // Khởi tạo bài thi
+    function initQuiz() {
+      const container = document.getElementById('quiz-container');
+      container.innerHTML = '';
+
+      let currentSection = "";
+      let globalIndex = 1;
+
+      processedQuestions = rawData.map((q) => {
+        const shuffledOptions = shuffleArray(q.options);
+        return {
+          ...q,
+          displayIndex: globalIndex++,
+          options: shuffledOptions,
+          userAnswer: null
+        };
+      });
+
+      processedQuestions.forEach((q) => {
+        if (q.section !== currentSection) {
+          currentSection = q.section;
+          const secTitle = document.createElement('div');
+          secTitle.className = 'section-header';
+          secTitle.innerHTML = `📌 ${currentSection}`;
+          container.appendChild(secTitle);
+
+          if (q.passage) {
+            const passBox = document.createElement('div');
+            passBox.className = 'passage-box';
+            passBox.innerHTML = q.passage;
+            container.appendChild(passBox);
+          }
+        }
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.id = `card-${q.id}`;
+
+        let optionsHTML = '';
+        q.options.forEach((opt) => {
+          optionsHTML += `
+            <button class="btn-option" id="btn-${q.id}-${opt.label}" onclick="checkAnswer('${q.id}', '${opt.label}')">
+              ${opt.text}
+            </button>
+          `;
+        });
+
+        card.innerHTML = `
+          <span class="q-number">Câu ${q.displayIndex}</span>
+          <div class="q-text">${q.question}</div>
+          <div class="options-grid">${optionsHTML}</div>
+          <div class="explanation-box" id="exp-${q.id}">
+            <div class="explanation-title">💡 GIẢI THÍCH CHI TIẾT TỪ MS LÊ HẰNG:</div>
+            <div>${q.explanation}</div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+    }
+
+    // Xử lý chọn đáp án tức thì
+    function checkAnswer(qId, selectedLabel) {
+      const q = processedQuestions.find(item => item.id === qId);
+      if (!q || q.userAnswer !== null) return;
+
+      q.userAnswer = selectedLabel;
+      const card = document.getElementById(`card-${qId}`);
+      const expBox = document.getElementById(`exp-${qId}`);
+      const isCorrect = (selectedLabel === q.correct);
+
+      q.options.forEach(opt => {
+        const btn = document.getElementById(`btn-${qId}-${opt.label}`);
+        btn.disabled = true;
+        if (opt.label === q.correct) {
+          btn.classList.add('correct');
+        }
+      });
+
+      if (isCorrect) {
+        playSound('correct');
+        confetti({ particleCount: 35, spread: 60, origin: { y: 0.7 } });
+      } else {
+        playSound('wrong');
+        const wrongBtn = document.getElementById(`btn-${qId}-${selectedLabel}`);
+        if (wrongBtn) wrongBtn.classList.add('wrong');
+        card.classList.add('shake');
+        setTimeout(() => card.classList.remove('shake'), 500);
+      }
+
+      expBox.style.display = 'block';
+    }
+
+    // Nộp bài & Đánh giá
+    function submitQuiz() {
+      let correctCount = 0;
+      let total = processedQuestions.length;
+
+      processedQuestions.forEach(q => {
+        if (q.userAnswer === q.correct) {
+          correctCount++;
+        }
+      });
+
+      const percentage = (correctCount / total) * 100;
+      const scoreDisplay = document.getElementById('scoreDisplay');
+      const feedbackText = document.getElementById('feedbackText');
+
+      scoreDisplay.innerText = `${correctCount} / ${total}`;
+
+      if (percentage < 50) {
+        feedbackText.innerText = "Điểm lần này chưa cao lắm, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+      } else if (percentage <= 80) {
+        feedbackText.innerText = "Con đã có tiến bộ khá ổn rồi, con cố gắng đọc kỹ giải thích đáp án và làm lại nha. Cô tin con sẽ làm tốt hơn ở lần sau!";
+      } else {
+        feedbackText.innerText = "Làm tốt lắm, con cố gắng rinh điểm 10 ở lần sau nha!";
+      }
+
+      document.getElementById('resultModal').style.display = 'flex';
+
+      if (percentage >= 80) {
+        confetti({ particleCount: 120, spread: 100, origin: { y: 0.5 } });
+      }
+    }
+
+    function closeModal() {
+      document.getElementById('resultModal').style.display = 'none';
+    }
+
+    window.onload = initQuiz;
+  </script>
+</body>
+</html>
